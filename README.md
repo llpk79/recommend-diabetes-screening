@@ -5,3 +5,4 @@
 - Install dependencies into virtual environment: `pipenv install`
 - Activate virtual environment: `pipenv shell`
 - Run web app: `gunicorn index:server`
+- Exit virtual environment: `exit`
