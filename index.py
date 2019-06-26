@@ -25,7 +25,6 @@ def render_content(tab):
     elif tab == 'tab-predict': return predict.layout
     elif tab == 'tab-explain': return explain.layout
     elif tab == 'tab-evaluate': return evaluate.layout
-    elif tab == 'tab-explore': return explore.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
