@@ -12,6 +12,7 @@ pandas = "*"
 scikit-learn = "*"
 category-encoders = "*"
 xgboost = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
