@@ -8,107 +8,172 @@ import pandas as pd
 
 from app import app
 
-loan_purposes = ['Business',
-                 'Car financing',
-                 'Credit card refinancing',
-                 'Debt consolidation',
-                 'Green loan',
-                 'Home buying',
-                 'Home improvement',
-                 'Major purchase',
-                 'Medical expenses',
-                 'Moving and relocation',
-                 'Other',
-                 'Vacation']
-
+column_values = load('model/models/column_values.joblib')
+columns = list(column_values.keys())
 style = {'padding': '1.5em'}
 
 layout = html.Div([
     dcc.Markdown("""
         ### Predict
 
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Select from the dropdown menus to see if a medical screening for diabetes might is recommended.
     
     """), 
 
     html.Div([
-        dcc.Markdown('###### Annual Income'), 
-        dcc.Slider(
-            id='annual-income', 
-            min=20000,
-            max=200000,
-            step=5000,
-            value=65000, 
-            marks={n: f'{n/1000:.0f}k' for n in range(20000,220000,20000)} 
-        ), 
-    ], style=style), 
-
-    html.Div([
-        dcc.Markdown('###### Credit Score'), 
-        dcc.Slider(
-            id='credit-score', 
-            min=650,
-            max=850, 
-            step=10, 
-            value=700, 
-            marks={n: str(n) for n in range(650,900,50)}
-        ),
-    ], style=style), 
-
-    html.Div([
-        dcc.Markdown('###### Loan Amount'), 
-        dcc.Slider(
-            id='loan-amount', 
-            min=1000, 
-            max=40000, 
-            step=1000, 
-            value=10000, 
-            marks={n: f'{n/1000:.0f}k' for n in range(5000,45000,5000)}
-        ),  
-    ], style=style),
-
-    html.Div([
-        dcc.Markdown('###### Loan Purpose'), 
+        dcc.Markdown(f'###### {columns[0]}'), 
         dcc.Dropdown(
-            id='loan-purpose', 
-            options=[{'label': purpose, 'value': purpose} for purpose in loan_purposes], 
-            value=loan_purposes[0]
+            id=columns[0], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[0]]], 
+            value=column_values[columns[0]][0]
+        ), 
+    ], style=style), 
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[1]}'), 
+        dcc.Dropdown(
+            id=columns[1], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[1]]], 
+            value=column_values[columns[1]][0]
+        ), 
+    ], style=style), 
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[2]}'), 
+        dcc.Dropdown(
+            id=columns[2], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[2]]], 
+            value=column_values[columns[2]][0]
         ), 
     ], style=style),
 
     html.Div([
-        dcc.Markdown('###### Monthly Debts'), 
-        dcc.Slider(
-            id='monthly-debts', 
-            min=0, 
-            max=5000, 
-            step=100, 
-            value=1000, 
-            marks={n: str(n) for n in range(500,5500,500)}
-        )
+        dcc.Markdown(f'###### {columns[3]}'), 
+        dcc.Dropdown(
+            id=columns[3], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[3]]], 
+            value=column_values[columns[3]][0]
+        ), 
+    ], style=style),
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[4]}'), 
+        dcc.Dropdown(
+            id=columns[4], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[4]]], 
+            value=column_values[columns[4]][0]
+        ), 
+    ], style=style),
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[5]}'), 
+        dcc.Dropdown(
+            id=columns[5], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[5]]], 
+            value=column_values[columns[5]][0]
+        ), 
+    ], style=style),
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[6]}'), 
+        dcc.Dropdown(
+            id=columns[6], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[6]]], 
+            value=column_values[columns[6]][0]
+        ), 
+    ], style=style),
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[7]}'), 
+        dcc.Dropdown(
+            id=columns[7], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[7]]], 
+            value=column_values[columns[7]][0]
+        ), 
+    ], style=style),
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[8]}'), 
+        dcc.Dropdown(
+            id=columns[8], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[8]]], 
+            value=column_values[columns[8]][0]
+        ), 
+    ], style=style),
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[9]}'), 
+        dcc.Dropdown(
+            id=columns[9],
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[9]]], 
+            value=column_values[columns[9]][0]
+        ), 
+    ], style=style),
+
+    html.Div([
+        dcc.Markdown(f'###### {columns[10]}'), 
+        dcc.Dropdown(
+            id=columns[10], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[10]]], 
+            value=column_values[columns[10]][0]
+        ), 
     ], style=style),
 
     dcc.Markdown('### Prediction'), 
     html.Div(id='prediction-content', style={'marginBottom': '5em'}), 
-
 ])
 
 @app.callback(
     Output('prediction-content', 'children'),
-    [Input('annual-income', 'value'),
-     Input('credit-score', 'value'),
-     Input('loan-amount', 'value'),
-     Input('loan-purpose', 'value'),
-     Input('monthly-debts', 'value')])
-def predict(annual_income, credit_score, loan_amount, loan_purpose, monthly_debts):
+    [Input('Age', 'value'),
+     Input('Income', 'value'),
+     Input('Total Household', 'value'),
+     Input('Overweight', 'value'),
+     Input('Good Health', 'value'),
+     Input('Fruit', 'value'),
+     Input('Sleep Hrs', 'value'),
+     Input('Insurance', 'value'),
+     Input('Recent Dr Visit', 'value'),
+     Input('Smoker', 'value'),
+     Input('Alcohol', 'value')])
+
+def predict(Age, 
+            Income, 
+            Total_Household, 
+            Overweight, 
+            Good_Health, 
+            Fruit, 
+            Sleep_Hrs, 
+            Insurance, 
+            Recent_Dr_Visit, 
+            Smoker, 
+            Alcohol
+           ):
+    print('in function')
 
     df = pd.DataFrame(
-        columns=['Annual Income', 'Credit Score', 'Loan Amount', 'Loan Purpose', 'Monthly Debts'], 
-        data=[[annual_income, credit_score, loan_amount, loan_purpose, monthly_debts]]
-    )
+        columns=columns, 
+        data=[[Age, 
+               Income, 
+               Total_Household, 
+               Overweight, 
+               Good_Health, 
+               Fruit, 
+               Sleep_Hrs, 
+               Insurance, 
+               Recent_Dr_Visit, 
+               Smoker, 
+               Alcohol
+               ]])
+    
+    pipeline = load('model/models/pipeline.joblib')
+    model = load('model/models/estimator.joblib')
+    print(df)
 
-    pipeline = load('model/pipeline.joblib')
-    y_pred_log = pipeline.predict(df)
-    y_pred = np.expm1(y_pred_log)[0]
-
-    return f'Interest rate for 36 month loan: {y_pred:.2f}%'
+    df_ = pipeline.transform(df)
+    y_pred_proba = model.predict_proba(df_)[:, 1] > .4808
+    print(f'Prediction: {y_pred_proba}')
+#     if y_pred_proba:
+    return 'You may benefit from a medical diabetic screening.'
+#     else:
+#         return 'The model does not recommend diabetic screening.'
