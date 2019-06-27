@@ -136,7 +136,7 @@ layout = html.Div([
     Output('prediction-content', 'children'),
     [Input('Age', 'value'),
      Input('Income', 'value'),
-     Input('Over_median_income', 'value'),
+     Input('Over Median Income', 'value'),
      Input('Total Household', 'value'),
      Input('Overweight', 'value'),
      Input('Good Health', 'value'),
