@@ -119,6 +119,15 @@ layout = html.Div([
         ), 
     ], style=style),
 
+    html.Div([
+        dcc.Markdown(f'###### {columns[11]}'), 
+        dcc.Dropdown(
+            id=columns[11], 
+            options=[{'label': purpose, 'value': purpose} for purpose in column_values[columns[11]]], 
+            value=column_values[columns[11]][0]
+        ), 
+    ], style=style),
+
     dcc.Markdown('### Prediction'), 
     html.Div(id='prediction-content', style={'marginBottom': '5em'}), 
 ])

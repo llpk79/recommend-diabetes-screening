@@ -301,7 +301,7 @@ df = df[final_colunns]
 df = shuffle(df,
              random_state=42
              )
-df.to_csv('data/model_data.csv', index_label='index')
+df.to_csv('model/model_data.csv', index_label='index')
 # Finally, separate into different years.
 # df11 = df[df['Year'] == 2011]
 
