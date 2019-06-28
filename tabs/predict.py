@@ -180,14 +180,21 @@ def predict(Age,
                Alcohol
                ]])
     
-    pickled_pipeline = load(open('model/models/pipeline.p', 'rb'))
-    pipeline = loads(pickled_pipeline)
+#     pickled_pipeline = load(open('model/models/pipeline.p', 'rb'))
+#     pipeline = loads(pickled_pipeline)
+    pickled_encoder = load(open('model/models/encoder.p', 'rb'))
+    encoder = loads(pickled_encoder)
+    
+    pickled_imputer = load(open('model/models/imputer.p', 'rb'))
+    imputer = loads(pickled_imputer)
     
     pickled_model = load(open('model/models/estimator.p', 'rb'))
     model = loads(pickled_model)
     print(df)
 
-    df_ = pipeline.transform(df)
+#     df_ = pipeline.transform(df)
+    df_enc = encoder.transform(df)
+    df_ = imputer.transform(df_enc)
 #     df_ = pipeline.named_steps['ordinalencoder'].transform(df)
 #     df_ = pipeline.named_steps['simpleimputer'].transform(df_)
     y_pred_proba = model.predict_proba(df_)[:, 1] > .4808
