@@ -104,7 +104,7 @@ df['General Health'] = df['Good Health'].replace('Excelent', 'Excellent')
 df['Average hours of sleep'] = df['sleptim1'].map(lambda x: np.nan if x in [99, 77] else x)
 
 # Insurance status.
-df['Health insurance'] = df['_hcvu651'].replace('Missing', 'Unknown')
+df['Insurance status'] = df['_hcvu651'].replace('Missing', 'Unknown')
 
 # Did you forego medical care do to cost?
 df['Dr Too Much'] = df['medcost'].replace('DK', 'Unknown')
@@ -191,7 +191,7 @@ final_colunns = [
                  'Fruit fanaticism',
                  'Vegetable voraciousness',
                  'Average hours of sleep',
-                 'Health insurance',
+                 'Insurance status',
                  'Skipped a Dr visit because of money',
                  'Last Dr visit',
                  'Smoking status',
