@@ -20,7 +20,7 @@ df = pd.read_stata("C:\\Users\Paul\PycharmProjects\BlogPost\data\WA_BRFSS_11to17
                    convert_missing=False)
 
 # Rename age column.
-df['Age'] = df['_ageg5yr']
+df['Age range'] = df['_ageg5yr']
 
 # 77 and 99 are coded as unknown and refused respectively. I'm assuming someone filled out the survey and so score a 1.
 df['numadult'] = df['numadult'].map(lambda x: 1 if x in [77, 99] else x)
@@ -38,9 +38,9 @@ df['Adults'] = df['adults'].map(lambda x: 1 if x == 0 else x)
 df['Children'] = df['children'].map(lambda x: 0 if x in [88, 99] else x)
 
 df['Ownership'] = df['renthom1'].replace('Refused', 'Unknown')
-df['Ownership'] = df['Ownership'].replace('Don\'t Know', 'Unknown')
+df['Home ownership'] = df['Ownership'].replace('Don\'t Know', 'Unknown')
 
-df['Total Household'] = df['Adults'] + df['Children']
+df['Total number living in household'] = df['Adults'] + df['Children']
 
 # Change values for nicer plotting.
 df['Race'] = df['_race'].map({'White NH': 'White', 
@@ -56,17 +56,17 @@ df['Race'] = df['_race'].map({'White NH': 'White',
 df['employment'] = pd.concat([df['employ'], df['employ1']], join='inner', ignore_index=True, sort=False)
 df['employment'] = df['employment'].cat.add_categories('Unknown')
 df['Employment'] = df['employment'].fillna('Unknown')
-df['Employment'] = df['Employment'].replace('Refused', 'Unknown')
+df['Employment status'] = df['Employment'].replace('Refused', 'Unknown')
 
 # Rename value for nicer plotting.
-df['Income'] = df['income2'].replace('Don\'t Know', 'Unknown')
+df['Income range'] = df['income2'].replace('Don\'t Know', 'Unknown')
 
 # King County's median income in 2015 was $75k
-df['Over Median Income'] = (df['income2'] == '$75+').astype(str)
+df['Income over $75K'] = (df['income2'] == '$75+').astype(str)
 
 # Use calculated BMI.
 df['_bmi5cat'] = df['_bmi5cat'].cat.add_categories('Unknown')
-df['Overweight'] = df['_bmi5cat'].fillna('Unknown')
+df['Body Mass Index'] = df['_bmi5cat'].fillna('Unknown')
 
 # Clean zipcode column.
 df['zips'] = df['zipcode'] + df['zipcode1']
@@ -98,23 +98,24 @@ df['Zip Code'] = df['Zip Code'].astype(int).astype(str)
 # Relabel columns with respondent's self assesment.
 df['Good Health'] = df['genhlth'].replace('DK', 'Unknown')
 df['Good Health'] = df['Good Health'].replace('Missing', 'Unknown')
+df['General Health'] = df['Good Health'].replace('Excelent', 'Excellent')
 
 # Convert nan code to nan.
-df['Sleep Hrs'] = df['sleptim1'].map(lambda x: np.nan if x in [99, 77] else x)
+df['Average hours of sleep'] = df['sleptim1'].map(lambda x: np.nan if x in [99, 77] else x)
 
 # Insurance status.
-df['Insurance'] = df['_hcvu651'].replace('Missing', 'Unknown')
+df['Health insurance'] = df['_hcvu651'].replace('Missing', 'Unknown')
 
 # Did you forego medical care do to cost?
 df['Dr Too Much'] = df['medcost'].replace('DK', 'Unknown')
-df['Dr Too Much'] = df['Dr Too Much'].replace('Refused', 'Unknown')
+df['Skipped a Dr visit because of money'] = df['Dr Too Much'].replace('Refused', 'Unknown')
 
 # Time since last apt. Categorical.
 df['Recent Dr Visit'] = df['checkup1'].replace('DK', 'Unknown')
-df['Recent Dr Visit'] = df['Recent Dr Visit'].replace('Refused', 'Unknown')
+df['Last Dr visit'] = df['Recent Dr Visit'].replace('Refused', 'Unknown')
 
 # Smoking history.
-df['Smoker'] = df['_smoker3'].replace('Missing', 'Unknown')
+df['Smoking status'] = df['_smoker3'].replace('Missing', 'Unknown')
 
 # Simplify Pre diabetic and diabetic columns to boolean.
 df['prediab1'] = df['prediab1'].fillna('DK')
@@ -127,67 +128,16 @@ df['Diabetic'] = df['diabete3'].map(lambda x: True if x  == 'Yes' else False)
 # Add active column for meeting activity recomendations, boolean .
 df['active'] = pd.concat([df['_paindex'], df['_paindx1']], join='inner', ignore_index=True, sort=False)
 df['active'] = df['active'].cat.add_categories('Unknown')
-df['Active'] = df['active'].fillna('Unknown')
-
-# Clean vegetable and fruit data to reflex frequency of consumption by day, week and month.
-# Any unknowns we assume are zero to avoid inflating our good eating habits.
-# df['vegeda1_'] = df['vegeda1_'].fillna(0)
-
-# df['vegeda2_'] = df['vegeda2_'].fillna(0)
-
-# df['frutda1_'] = df['frutda1_'].fillna(0)
-
-# df['frutda2_'] = df['frutda2_'].fillna(0)
-
-# df['ftjuda1_'] = df['ftjuda1_'].fillna(0)
-
-# df['ftjuda2_'] = df['ftjuda2_'].fillna(0)
-
-# df['_vegesum'] = df['_vegesum'].fillna(0)
-
-# df['_vegesu1'] = df['_vegesu1'].fillna(0)
-
-# df['_frutsum'] = df['_frutsum'].fillna(0)
-
-# df['_frutsu1'] = df['_frutsu1'].fillna(0)
-
-# # Combine columns from different years.
-# df['veg_day'] = df['vegeda1_'] + df['vegeda2_']
-
-# df['fruit_day'] = df['frutda1_'] + df['frutda2_']
-
-# df['juice_day'] = df['ftjuda1_'] + df['ftjuda2_']
-
-# df['veg_sum'] = df['_vegesum'] + df['_vegesu1']
-
-# df['fruit_sum'] = df['_frutsum'] + df['_frutsu1']
-
-# # Assume survey takers skipping the fruit and veg every day questions are filled with shame at not doing so.
-# df['_frtlt1'] = df['_frtlt1'].map({'One or more per day': 1, 'Less than once per day': 0, 'Missing': 0})
-# df['_frtlt1a'] = df['_frtlt1a'].map({'One or more per day': 1, 'Less than once per day': 0, 'Missing': 0})
-
-# df['_veglt1'] = df['_veglt1'].map({'One or more per day': 1, 'Less than once per day': 0, 'Missing': 0})
-# df['_veglt1a'] = df['_veglt1a'].map({'One or more per day': 1, 'Less than once per day': 0, 'Missing': 0})
-
-# # Combine years.
-# df['Fruit Daily'] = (df['_frtlt1'] == 1) | (df['_frtlt1a'] == 1)
-# df['Veg Daily'] = (df['_veglt1'] == 1) | (df['_veglt1a'] == 1)
-
-# # Exclude people claiming to eat over 16 servings of fruit or 23 servings of vegetables.
-# df = df[((df['_vegetex'] == 'Included') | (df['_vegete1'] == 'Included')) &
-#         ((df['_fruitex'] == 'Included') | (df['_fruite1'] == 'Included'))]
-
+df['Activity status'] = df['active'].fillna('Unknown')
 
 # Functions to decode weekly and monthly frequency responses.
 def nothing(x):
-    # code 555
     if re.match(r'^555$', str(x).strip()):
         return True
     else:
         return False
 
 def etoh(x):
-    # Code in the 100s.
     week = re.match(r'1(\d\d)', str(x).strip())
     month =  re.match(r'2(\d\d)', str(x).strip())
     unknown = re.match(r'7|8', str(x).strip())
@@ -204,24 +154,10 @@ def etoh(x):
     elif none:
         return '0'
 
-# def per_week(x):
-#     # Code in the 200s.
-#     else:
-        return False
-
-
-# def per_week_17(x):
-#     # Code in the 200s, but not 200.
-#     else:
-#         return False
-
-
 def fruit(x):
-    # Code in the 300s.
     if re.match(r'1', str(x)):
         return 'Daily'
     if re.match(r'2', str(x)):
-#         print('week')
         return 'Weekly'
     if re.match(r'3', str(x)):
         return 'Monthly'
@@ -230,70 +166,36 @@ def fruit(x):
     else:
         return ''
 
-
-# def per_month_17(x):
-#     # Code in the 300s, but not 300.
-#     else:
-#         return False
-
 # Alcohol consumption.
-df['Alcohol'] = df['alcday5'].map(etoh)
-
-
-# Make a column for no fruit or veg at all.
-# df['No Veg'] = df['vegetab1'].map(nothing) | df['vegetab2'].map(nothing)
-# df['No Fruit'] = df['fruit1'].map(nothing) | df['fruit2'].map(nothing)
+df['Estimated number of alcoholic drinks per month'] = df['alcday5'].map(etoh)
 
 df['Vegetables'] = df['vegetab1'].map(fruit) + df['vegetab2'].map(fruit)
-df['Vegetables'] = df['Vegetables'].map(lambda x: 'Unknown' if x == '' else x)
+df['Vegetable voraciousness'] = df['Vegetables'].map(lambda x: 'Unknown' if x == '' else x)
 
 df['Fruit'] = df['fruit1'].map(fruit) + df['fruit2'].map(fruit)
-df['Fruit'] = df['Fruit'].map(lambda x: 'Unknown' if x == '' else x)
-
-# And one for monthly intake, unless daily or weekly boxes are checked. No double counting.
-# df['veg_month'] = df['vegetab1'].map(per_month) | df['vegetab2'].map(per_month_17)
-# df['Veg Monthly'] = ((df['veg_month'] == 1) & (df['Veg Weekly'] == 0) & (df['Veg Daily'] == 0))
-
-# df['fruit_month'] = df['fruit1'].map(per_month) | df['fruit2'].map(per_month_17)
-# df['Fruit Monthly'] = ((df['fruit_month'] == 1) & 
-#                        (df['Fruit Weekly'] == 0) & 
-#                        (df['Fruit Daily'] == 0))
-
+df['Fruit fanaticism'] = df['Fruit'].map(lambda x: 'Unknown' if x == '' else x)
 
 # The columns we want to keep in some sort of order.
 final_colunns = [
-                 'Age',
+                 'Age range',
                  'Race',
-                 'Income',
-                 'Over Median Income',
-                 'Ownership',
-#                  'Adults',
-#                  'Children',
-                 'Total Household',
-#                  'Zip Code',
-#                  'In Food Desert',
-                 'Employment',
-                 'Active',
-                 'Overweight',
-#                  'Pre Diabetic',
+                 'Income range',
+                 'Income over $75K',
+                 'Home ownership',
+                 'Total number living in household',
+                 'Employment status',
+                 'Activity status',
+                 'Body Mass Index',
                  'Diabetic',
-                 'Good Health',
-#                  'No Fruit', 
-#                  'No Veg',
-#                  'Fruit Daily',
-#                  'Veg Daily',
-#                  'Fruit Weekly',
-#                  'Veg Weekly',
-#                  'Fruit Monthly',
-#                  'Veg Monthly',
-                 'Fruit',
-                 'Vegetables',
-                 'Sleep Hrs',
-                 'Insurance',
-                 'Dr Too Much',
-                 'Recent Dr Visit',
-                 'Smoker',
-                 'Alcohol',
+                 'General Health',
+                 'Fruit fanaticism',
+                 'Vegetable voraciousness',
+                 'Average hours of sleep',
+                 'Health insurance',
+                 'Skipped a Dr visit because of money',
+                 'Last Dr visit',
+                 'Smoking status',
+                 'Estimated number of alcoholic drinks per month',
                  ]
 
 df = df[final_colunns]

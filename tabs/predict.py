@@ -136,18 +136,18 @@ layout = html.Div([
 
 @app.callback(
     Output('prediction-content', 'children'),
-    [Input('Age', 'value'),
-     Input('Income', 'value'),
-     Input('Over Median Income', 'value'),
-     Input('Total Household', 'value'),
-     Input('Overweight', 'value'),
-     Input('Good Health', 'value'),
-     Input('Fruit', 'value'),
-     Input('Sleep Hrs', 'value'),
-     Input('Insurance', 'value'),
-     Input('Recent Dr Visit', 'value'),
-     Input('Smoker', 'value'),
-     Input('Alcohol', 'value')])
+    [Input('Age range', 'value'),
+     Input('Income range', 'value'),
+     Input('Income over $75K', 'value'),
+     Input('Total number living in household', 'value'),
+     Input('Body Mass Index', 'value'),
+     Input('General Health', 'value'),
+     Input('Fruit fanaticism', 'value'),
+     Input('Average hours of sleep', 'value'),
+     Input('Insurance status', 'value'),
+     Input('Last Dr visit', 'value'),
+     Input('Smoking status', 'value'),
+     Input('Estimated number of alcoholic drinks per month', 'value')])
 
 def predict(Age, 
             Income,
