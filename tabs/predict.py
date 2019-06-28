@@ -187,7 +187,7 @@ def predict(Age,
 
     df_ = pipeline.transform(df)
     y_pred_proba = model.predict_proba(df_)[:, 1]
-    positive = y_pred_proba > .4808
+    positive = y_pred_proba > .48
     print(f'Prediction: {positive}, Probabity: {y_pred_proba}')
     if positive:
         return 'You may benefit from a medical diabetic screening.'
