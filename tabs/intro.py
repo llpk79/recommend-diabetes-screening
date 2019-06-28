@@ -19,5 +19,5 @@ Using basic health screening and a machine learning algorithm called the XG Boos
 
 In this very limited project, only data from King County, WA is used. Using more data and more targeted survey question could lead to better results and, perhaps, an effective clinical tool.
 """),
-html.Img(src='/assets/three.png', style={'width':'100%'}),
-         ]
+
+html.Img(src='/assets/three.png', style={'width':'90%'})]

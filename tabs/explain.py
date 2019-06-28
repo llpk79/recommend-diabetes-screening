@@ -30,6 +30,6 @@ So far we've made all of our prediction directly from the model. We can dig in t
 
 Given that our goal is to effectively allocate resources we want to balance false negatives, people we're sending to get poked and prodded who won't end up being diabetic, with false positives, people who are really diabetic that we're not recommending screening for.
 
-I was unable to make the below interactive, but just imagine being able to slide the red line on the top graph. Each of the blue bars on the graph is a group of people the model is giving a similar probability of being diabetic to. If we move that line left or right, lowering and raising our probability threshold, we can include and exclude different groups. I have taken the liberty of finding a sweet spot that makes a compromise between sending too many people to the clinic and missing too many true diabetics."""),
-html.Img(src='/assets/three.png', style={'width':'90%'}),
-]
+Imagine, what if you slide the red line on the top graph? Each of the blue bars on the graph is a group of people the model is giving a similar probability of being diabetic to. If we move that line left or right, lowering and raising our probability threshold, we can include and exclude different groups. I have taken the liberty of finding a sweet spot that makes a compromise between sending too many people to the clinic and missing too many true diabetics."""),
+          
+html.Img(src='/assets/three.png', style={'width':'90%'})]
