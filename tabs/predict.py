@@ -168,8 +168,8 @@ def predict(Age,
         columns=columns, 
         data=[[Age, 
                Income, 
+               Over_median_income==True,
                Total_Household, 
-               Over_median_income,
                Overweight, 
                Good_Health, 
                Fruit, 
@@ -180,26 +180,16 @@ def predict(Age,
                Alcohol
                ]])
     
-#     pickled_pipeline = load(open('model/models/pipeline.p', 'rb'))
-#     pipeline = loads(pickled_pipeline)
-    pickled_encoder = load(open('model/models/encoder.p', 'rb'))
-    encoder = loads(pickled_encoder)
-    
-    pickled_imputer = load(open('model/models/imputer.p', 'rb'))
-    imputer = loads(pickled_imputer)
+    pickled_pipeline = load(open('model/models/pipeline.p', 'rb'))
+    pipeline = loads(pickled_pipeline)
     
     pickled_model = load(open('model/models/estimator.p', 'rb'))
     model = loads(pickled_model)
-    print(df)
 
-#     df_ = pipeline.transform(df)
-    df_enc = encoder.transform(df)
-    df_ = imputer.transform(df_enc)
-#     df_ = pipeline.named_steps['ordinalencoder'].transform(df)
-#     df_ = pipeline.named_steps['simpleimputer'].transform(df_)
+    df_ = pipeline.transform(df)
     y_pred_proba = model.predict_proba(df_)[:, 1] > .4808
     print(f'Prediction: {y_pred_proba}')
-#     if y_pred_proba:
-    return 'You may benefit from a medical diabetic screening.'
-#     else:
-#         return 'The model does not recommend diabetic screening.'
+    if y_pred_proba:
+        return 'You may benefit from a medical diabetic screening.'
+    else:
+        return 'The model does not recommend diabetic screening.'
