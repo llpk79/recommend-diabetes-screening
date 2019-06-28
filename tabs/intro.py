@@ -4,7 +4,7 @@ import dash_html_components as html
 
 from app import app
 
-layout = dcc.Markdown("""
+layout = [dcc.Markdown("""
 ### Intro
 
 #### Disclaimer:
@@ -18,4 +18,6 @@ Diagnosing diabetes requires blood draws, fasting and can take several visits to
 Using basic health screening and a machine learning algorithm called the XG Boost Classifier, we attempt to recommend screening as a fast, low cost method of determining likelihood of a diabetes diagnosis.
 
 In this very limited project, only data from King County, WA is used. Using more data and more targeted survey question could lead to better results and, perhaps, an effective clinical tool.
-""")
+"""),
+html.Img(src='/assets/three.png', style={'width':'100%'}),
+         ]
