@@ -3,7 +3,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from app import app
 
-layout = dcc.Markdown("""
+layout = html.Div([
+    dcc.Markdown("""
 This model was produced using data from behavioral health surveys taken in King County, WA from 2011-2017. You can have fun with your own copy by going [here](https://www.doh.wa.gov/DataandStatisticalReports/DataSystems/BehavioralRiskFactorSurveillanceSystemBRFSS).
 
 After organizing the data into something our model can understand, it's important to evaluate the model and determine if it's useful.
@@ -31,6 +32,7 @@ Given that our goal is to effectively allocate resources we want to balance fals
 
 I was unable to make the below interactive, but just imagine being able to slide the red line on the top graph. Each of the blue bars on the graph is a group of people the model is giving a similar probability of being diabetic to. If we move that line left or right, lowering and raising our probability threshold, we can include and exclude different groups. I have taken the liberty of finding a sweet spot that makes a compromise between sending too many people to the clinic and missing too many true diabetics.
 
-![slider]('images/multi.png')
+![slider]('images/three.png')
 
 """)
+])
