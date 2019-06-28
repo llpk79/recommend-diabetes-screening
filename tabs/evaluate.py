@@ -1,7 +1,9 @@
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
+from ipywidgets import interact, fixed
 
+import pickle
 from app import app
 
 layout = dcc.Markdown("""
@@ -11,3 +13,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit ornare
 
 Phasellus sodales vehicula nisi sit amet tincidunt. Integer mattis, lacus vitae tempor congue, tellus nulla congue lectus, id facilisis enim nunc eu arcu. Suspendisse vehicula metus non urna congue, ac fringilla dolor venenatis. Nulla facilisi. Etiam ornare ipsum id massa dictum, sit amet porttitor neque vehicula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam a purus vulputate leo egestas consectetur in nec augue.
 """)
+
+pickled_threshold = load(open('threshold.p', 'rb'))
+threshold = loads(pickled_threshold)
+
+threshold()

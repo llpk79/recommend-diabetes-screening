@@ -12,13 +12,13 @@ pickled_column_values = load(open('model/models/column_values.p', 'rb'))
 column_values = loads(pickled_column_values)
 
 columns = list(column_values.keys())
-style = {'padding': '1.5em'}
+style = {'padding': '1em'}
 
 layout = html.Div([
     dcc.Markdown("""
         ### Predict
 
-        Select from the dropdown menus to see if a medical screening for diabetes might is recommended.
+        Select from the dropdown menus to see if a medical screening for diabetes is recommended by the model.
     
     """), 
 
@@ -162,7 +162,6 @@ def predict(Age,
             Smoker, 
             Alcohol
            ):
-    print('in function')
 
     df = pd.DataFrame(
         columns=columns, 
@@ -187,9 +186,10 @@ def predict(Age,
     model = loads(pickled_model)
 
     df_ = pipeline.transform(df)
-    y_pred_proba = model.predict_proba(df_)[:, 1] > .4808
-    print(f'Prediction: {y_pred_proba}')
-    if y_pred_proba:
+    y_pred_proba = model.predict_proba(df_)[:, 1]
+    positive = y_pred_proba > .4808
+    print(f'Prediction: {positive}, Probabity: {y_pred_proba:.4f}')
+    if positive:
         return 'You may benefit from a medical diabetic screening.'
     else:
         return 'The model does not recommend diabetic screening.'
