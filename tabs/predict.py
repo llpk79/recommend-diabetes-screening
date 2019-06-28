@@ -2,13 +2,15 @@ from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
 
-from joblib import load
+from pickle import load, loads
 import numpy as np
 import pandas as pd
 
 from app import app
 
-column_values = load('model/models/column_values.joblib')
+pickled_column_values = load(open('model/models/column_values.p', 'rb'))
+column_values = loads(pickled_column_values)
+
 columns = list(column_values.keys())
 style = {'padding': '1.5em'}
 
@@ -178,11 +180,16 @@ def predict(Age,
                Alcohol
                ]])
     
-    pipeline = load('model/models/pipeline.joblib')
-    model = load('model/models/estimator.joblib')
+    pickled_pipeline = load(open('model/models/pipeline.p', 'rb'))
+    pipeline = loads(pickled_pipeline)
+    
+    pickled_model = load(open('model/models/estimator.p', 'rb'))
+    model = loads(pickled_model)
     print(df)
 
     df_ = pipeline.transform(df)
+#     df_ = pipeline.named_steps['ordinalencoder'].transform(df)
+#     df_ = pipeline.named_steps['simpleimputer'].transform(df_)
     y_pred_proba = model.predict_proba(df_)[:, 1] > .4808
     print(f'Prediction: {y_pred_proba}')
 #     if y_pred_proba:
