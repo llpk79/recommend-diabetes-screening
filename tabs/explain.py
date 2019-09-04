@@ -22,17 +22,16 @@ After trimming the features with zero or negative explanatory power, we run the 
 
 `[0]	validation_0-auc:0.783355	validation_1-auc:0.770201
 XGBRFClassifier validation ROC AUC: 0.7702009468059364`"""),
-          
+
 html.Img(src='/assets/posttrim.png', style={'width':'75%'}),
 
 dcc.Markdown("""
 So far we've made all of our prediction directly from the model. We can dig in to see what probability the model gives for each prediction being positive or negative and take a look whether we might adjust that to improve our guesses.
 
-Given that our goal is to effectively allocate resources we want to balance false negatives, people we're sending to get poked and prodded who won't end up being diabetic, with false negatives, people who are really diabetic that we're not recommending screening for.
+Given that our goal is to effectively allocate resources we want to balance false negatives, people we're sending to get poked and prodded who won't end up being diabetic, with false negatives, people who are really diabetic that we're not recommending screening for.."""),
 
-Imagine, what if you slide the red line on the top graph? Each of the blue bars on the graph is a group of people the model is giving a similar probability of being diabetic to. If we move that line left or right, lowering and raising our probability threshold, we can include and exclude different groups. I have taken the liberty of finding a sweet spot that makes a compromise between sending too many people to the clinic and missing too many true diabetics."""),
-          
-html.Img(src='/assets/dist.png', style={'width':'75%'}),
-html.Img(src='/assets/multi.png', style={'width':'75%'}),
-html.Img(src='/assets/heatmap.png', style={'width':'75%'}),
-]
+html.Div(""""<div>
+    <a href="https://plot.ly/~pkutrich/27/?share_key=RSPSAmiQWEC5fXFWL77lyr" target="_blank" title="dist-heat-roc-slider-h" style="display: block; text-align: center;"><img src="https://plot.ly/~pkutrich/27.png?share_key=RSPSAmiQWEC5fXFWL77lyr" alt="dist-heat-roc-slider-h" style="max-width: 100%;width: 1050px;"  width="1050" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+    <script data-plotly="pkutrich:27" sharekey-plotly="RSPSAmiQWEC5fXFWL77lyr" src="https://plot.ly/embed.js" async></script>
+</div>
+""")]
