@@ -8,10 +8,10 @@ from scipy.stats import gaussian_kde
 from sklearn.metrics import confusion_matrix
 
 
-def create_fig(self):
+def create_fig():
     print("We've gotten this far.")
-    val = pd.read_csv('../assets/val_data.csv')
-    roc = pd.read_csv('../assets/roc_data.csv')
+    val = pd.read_csv('/assets/val_data.csv')
+    roc = pd.read_csv('/assets/roc_data.csv')
     hist_data = val['y_pred_proba1']
     kde = gaussian_kde(hist_data)
     y = kde.pdf(np.linspace(min(hist_data), max(hist_data)))
