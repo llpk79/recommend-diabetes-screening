@@ -30,9 +30,4 @@ So far we've made all of our prediction directly from the model. We can dig in t
 
 Given that our goal is to effectively allocate resources we want to balance false negatives, people we're sending to get poked and prodded who won't end up being diabetic, with false negatives, people who are really diabetic that we're not recommending screening for.."""),
 
-dcc.Graph(""""
-<div>
-    <a href="https://plot.ly/~pkutrich/27/?share_key=RSPSAmiQWEC5fXFWL77lyr" target="_blank" title="dist-heat-roc-slider-h" style="display: block; text-align: center;"><img src="https://plot.ly/~pkutrich/27.png?share_key=RSPSAmiQWEC5fXFWL77lyr" alt="dist-heat-roc-slider-h" style="max-width: 100%;width: 1050px;"  width="1050" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
-    <script data-plotly="pkutrich:27" sharekey-plotly="RSPSAmiQWEC5fXFWL77lyr" src="https://plot.ly/embed.js" async></script>
-</div>
-""")]
+dcc.Graph(""""<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~pkutrich/27.embed"></iframe>""")]
