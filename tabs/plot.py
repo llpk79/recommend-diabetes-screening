@@ -4,15 +4,18 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from scipy.stats import gaussian_kde
 from sklearn.metrics import confusion_matrix
+import os
 
+print(os.getcwd())
 
 class PlotFig(object):
     def __init__(self):
         self.fig = self.create_fig()
 
     def create_fig(self):
-        val = pd.read_csv('/assets/val_data.csv')
-        roc = pd.read_csv('/assets/roc_data.csv')
+        print("We've gotten this far.")
+        val = pd.read_csv('../assets/val_data.csv')
+        roc = pd.read_csv('../assets/roc_data.csv')
         hist_data = val['y_pred_proba1']
         kde = gaussian_kde(hist_data)
         y = kde.pdf(np.linspace(min(hist_data), max(hist_data)))
@@ -248,6 +251,4 @@ class PlotFig(object):
         # Return chart.
         return fig
 
-
-if __name__ == "__main__":
-    pass
+fig = PlotFig().fig
