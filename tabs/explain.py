@@ -2,7 +2,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from .plot import PlotFig
 
-fig = PlotFig.fig
+fig = PlotFig().fig
 
 layout = [dcc.Markdown("""
 This model was produced using data from behavioral health surveys taken in King County, WA from 2011-2017. 
