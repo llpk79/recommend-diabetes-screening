@@ -7,11 +7,14 @@ from app import app
 layout = [dcc.Markdown("""
 ### Intro
 
-#### Disclaimer:
+###### Disclaimer:
 This web app is a week-long school project and has not been tested in any rigorous way. It is for demonstration and it's recommendations are for entertainment purposes only.
 """),
 
-dcc.Markdown("""Diabetes  is a serious, but manageable disease affecting ['over 100 million'](https://www.cdc.gov/media/releases/2017/p0718-diabetes-report.html), or around 9.4% of United States citizens in 2017.
+dcc.Markdown("""
+
+
+Diabetes  is a serious, but manageable disease affecting ['over 100 million'](https://www.cdc.gov/media/releases/2017/p0718-diabetes-report.html), or around 9.4% of United States citizens in 2017.
 
 Diagnosing diabetes requires blood draws, fasting and can take several visits to the clinic. It is important to develop tools to recommend screening to those most likely to have diabetes in order to reduce the hassle and pain of diagnosis and effectively allocate resources to where they are likely to be most effective.
 
