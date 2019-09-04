@@ -4,9 +4,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from scipy.stats import gaussian_kde
 from sklearn.metrics import confusion_matrix
-import os
 
-print(os.getcwd())
 
 class PlotFig(object):
     def __init__(self):
