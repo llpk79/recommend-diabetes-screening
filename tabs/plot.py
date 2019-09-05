@@ -12,8 +12,8 @@ class PlotFig(object):
 
     def create_fig(self):
         print("creating figure...")
-        val = pd.read_csv(open('/assets/val_data.csv', 'rb'))
-        roc = pd.read_csv(open('/assets/roc_data.csv', 'rb'))
+        val = pd.read_csv('assets/val_data.csv', 'rb')
+        roc = pd.read_csv('assets/roc_data.csv', 'rb')
         hist_data = val['y_pred_proba1']
         kde = gaussian_kde(hist_data)
         y = kde.pdf(np.linspace(min(hist_data), max(hist_data)))
@@ -248,6 +248,7 @@ class PlotFig(object):
 
         # Return chart.
         return fig
+
 
 if __name__ == "__main__":
     pass
