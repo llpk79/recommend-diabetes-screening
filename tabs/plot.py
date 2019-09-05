@@ -12,10 +12,11 @@ class PlotFig(object):
 
     def create_fig(self):
         print("creating figure...")
-        val = pd.read_csv("https://raw.githubusercontent.com/llpk79/recommend-diabetes-screening/master/assets/val_data.csv")
-        roc = pd.read_csv("https://raw.githubusercontent.com/llpk79/recommend-diabetes-screening/master/assets/roc_data.csv")
+        val = pd.read_csv(
+            "https://raw.githubusercontent.com/llpk79/recommend-diabetes-screening/master/assets/val_data.csv")
+        roc = pd.read_csv(
+            "https://raw.githubusercontent.com/llpk79/recommend-diabetes-screening/master/assets/roc_data.csv")
         hist_data = val['y_pred_proba1']
-        print(hist_data[5:])
         kde = gaussian_kde(hist_data)
         y = kde.pdf(np.linspace(min(hist_data), max(hist_data)))
         y_true = val['y_val'].astype(int)
@@ -118,7 +119,9 @@ class PlotFig(object):
                                            yref='paper'
                                            ),
                                        go.layout.Annotation(
-                                           text='The green bar on the left frame indicates the probability threshold for being diabetic. See how many people are correctly classified in the middle frame.',
+                                           text='The green bar on the left frame indicates the probability threshold '
+                                                'for being diabetic. See how many people are correctly classified in '
+                                                'the middle frame.',
                                            x=.5,
                                            y=-.35,
                                            showarrow=False,
@@ -128,7 +131,8 @@ class PlotFig(object):
                                            yref='paper'
                                            ),
                                        go.layout.Annotation(
-                                           text='The right frame plots the false positive rate on the x-axis vs the true positive rate on the y-axis',
+                                           text='The right frame plots the false positive rate on the x-axis vs the '
+                                                'true positive rate on the y-axis',
                                            x=.5,
                                            y=-.45,
                                            showarrow=False,

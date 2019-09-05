@@ -3,7 +3,8 @@ import dash_html_components as html
 from .plot import PlotFig
 
 fig = PlotFig().fig
-
+print(type(fig))
+print(fig.data[0])
 layout = [dcc.Markdown("""
 This model was produced using data from behavioral health surveys taken in King County, WA from 2011-2017. 
 You can have fun with your own copy by going 
