@@ -2,9 +2,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 from .plot import PlotFig
 
-fig = PlotFig().fig
-print(type(fig))
-print(fig.data[0])
+# fig = PlotFig().fig
+# print(type(fig))
+# print(fig.data[0])
 layout = [dcc.Markdown("""
 This model was produced using data from behavioral health surveys taken in King County, WA from 2011-2017. 
 You can have fun with your own copy by going 
@@ -49,6 +49,6 @@ guesses.
 Given that our goal is to effectively allocate resources we want to balance false negatives, people we're sending 
 to get poked and prodded who won't end up being diabetic, with false negatives, people who are really diabetic that 
 we're not recommending screening for."""),
-
-dcc.Graph(fig)
+html.Img(src="https://plot.ly/~pkutrich/27.embed")
+# dcc.Graph(PlotFig().fig)
 ]
