@@ -16,7 +16,7 @@ gives us a useful tool to visualize how well the model is doing. A perfect model
 triangle with the red line. A model that is no better than random guessing would put the blue line on top of the 
 red line which is given as a baseline for comparison."""),
 
-          html.Img(src='/assets/roc.png', style={'width': '50%', 'align': 'middle'}),
+          html.Img(src='/assets/roc.png', style={'align': 'right'}),
 
           dcc.Markdown("""
 The area under the blue tells us how well the model can use the variations between the examples of people's 
@@ -27,7 +27,7 @@ The next step is examining the model's features and looking at how helpful each 
 To do this we run the model multiple times, filling in one column with random noise and comparing the results with 
 each other. Doing so and plotting the results gives you something like this."""),
 
-          html.Img(src='/assets/pretrim.png', style={'width': '50%', 'align': 'middle'}),
+          html.Img(src='/assets/pretrim.png', style={'align': 'right'}),
 
           dcc.Markdown("""
 After trimming the features with zero or negative explanatory power, we run the model again and test for the area 
@@ -36,7 +36,7 @@ under the blue line again. We also check to see that the features we kept are in
 `[0]	validation_0-auc:0.783355	validation_1-auc:0.770201
 XGBRFClassifier validation ROC AUC: 0.7702009468059364`"""),
 
-          html.Img(src='/assets/posttrim.png', style={'width': '50%', 'align': 'middle'}),
+          html.Img(src='/assets/posttrim.png', style={'align': 'right'}),
 
           dcc.Markdown("""
 So far we've made all of our prediction directly from the model. We can dig in to see what probability the model 

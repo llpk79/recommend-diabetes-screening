@@ -1,12 +1,10 @@
-from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
-
-from pickle import load, loads
-import numpy as np
 import pandas as pd
-
 from app import app
+from dash.dependencies import Input, Output
+from pickle import load, loads
+
 
 pickled_column_values = load(open('model/models/column_values.p', 'rb'))
 column_values = loads(pickled_column_values)
@@ -134,6 +132,7 @@ layout = html.Div([
     html.Div(id='prediction-content', style={'marginBottom': '5em'}), 
 ])
 
+
 @app.callback(
     Output('prediction-content', 'children'),
     [Input('Age range', 'value'),
@@ -148,7 +147,6 @@ layout = html.Div([
      Input('Last Dr visit', 'value'),
      Input('Smoking status', 'value'),
      Input('Estimated number of alcoholic drinks per month', 'value')])
-
 def predict(Age, 
             Income,
             Over_median_income,
@@ -167,7 +165,7 @@ def predict(Age,
         columns=columns, 
         data=[[Age, 
                Income, 
-               Over_median_income==True,
+               Over_median_income == True,
                Total_Household, 
                Overweight, 
                Good_Health, 
