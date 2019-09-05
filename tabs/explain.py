@@ -49,5 +49,5 @@ Given that our goal is to effectively allocate resources we want to balance fals
 to get poked and prodded who won't end up being diabetic, with false negatives, people who are really diabetic that 
 we're not recommending screening for."""),
 
-dcc.Graph(fig.data)
+dcc.Graph(fig)
 ]

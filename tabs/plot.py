@@ -15,6 +15,7 @@ class PlotFig(object):
         val = pd.read_csv("https://raw.githubusercontent.com/llpk79/recommend-diabetes-screening/master/assets/val_data.csv")
         roc = pd.read_csv("https://raw.githubusercontent.com/llpk79/recommend-diabetes-screening/master/assets/roc_data.csv")
         hist_data = val['y_pred_proba1']
+        print(hist_data[5:])
         kde = gaussian_kde(hist_data)
         y = kde.pdf(np.linspace(min(hist_data), max(hist_data)))
         y_true = val['y_val'].astype(int)
@@ -250,5 +251,10 @@ class PlotFig(object):
         return fig
 
 
+def main():
+    fig = PlotFig().fig
+    return fig
+
+
 if __name__ == "__main__":
-    pass
+    main()
