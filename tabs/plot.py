@@ -248,3 +248,6 @@ class PlotFig(object):
 
         # Return chart.
         return fig
+
+if __name__ == "__main__":
+    pass
