@@ -51,25 +51,17 @@ to get poked and prodded who won't end up being diabetic, with false negatives, 
 we're not recommending screening for."""),
           # html.Img(src='https://plot.ly/~pkutrich/27.embed')
           # dcc.Graph(figure=PlotFig().fig)
-          html.Div(
-          html.A(href="https://plot.ly/~pkutrich/27/?share_key=RSPSAmiQWEC5fXFWL77lyr",
-                 target="_blank",
-                 title="dist-heat-roc-slider-h",
-                 style="display: block; text-align: center;"),
-          html.Img(src="https://plot.ly/~pkutrich/27.png?share_key=RSPSAmiQWEC5fXFWL77lyr",
-                   alt="dist-heat-roc-slider-h",
-                   style="max-width: 100%;width: 1050px;" ,
-                   width="1050",
-                   # onerror="this.onerror=null;this.src='https://plot.ly/404.png';",
-                   ),
-          html.Script({'src': "https://plot.ly/embed.js",
-                       'data-plotly': "pkutrich:27",
-                       'sharekey_plotly': "RSPSAmiQWEC5fXFWL77lyr"})
-          )
+          # html.Div(
+          html.Iframe(width="900", height="800", frameborder="0", scrolling="no", src="//plot.ly/~pkutrich/27.embed"),
+          # html.Img(src="https://plot.ly/~pkutrich/27.png?share_key=RSPSAmiQWEC5fXFWL77lyr",
+          #          alt="dist-heat-roc-slider-h",
+          #          style="max-width: 100%;width: 1050px;" ,
+          #          width="1050",
+          #          # onerror="this.onerror=null;this.src='https://plot.ly/404.png';",
+          #          ),
+          # html.Script({'src': "https://plot.ly/embed.js",
+          #              'data-plotly': "pkutrich:27",
+          #              'sharekey_plotly': "RSPSAmiQWEC5fXFWL77lyr"})
+          # )
           ]
-# <div>
-#     <a href="https://plot.ly/~pkutrich/27/?share_key=RSPSAmiQWEC5fXFWL77lyr" target="_blank" title="dist-heat-roc-slider-h" style="display: block; text-align: center;"><img src="https://plot.ly/~pkutrich/27.png?share_key=RSPSAmiQWEC5fXFWL77lyr" alt="dist-heat-roc-slider-h" style="max-width: 100%;width: 1050px;"  width="1050" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
-#     <script data-plotly="pkutrich:27" sharekey-plotly="RSPSAmiQWEC5fXFWL77lyr" src="https://plot.ly/embed.js" async></script>
-# </div>
-# ,
-#
+
