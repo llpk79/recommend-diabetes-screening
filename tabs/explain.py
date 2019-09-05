@@ -1,10 +1,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
-from .plot import PlotFig
 
-# fig = PlotFig().fig
-# print(type(fig))
-# print(fig.data[0])
+
 layout = [dcc.Markdown("""
 This model was produced using data from behavioral health surveys taken in King County, WA from 2011-2017. 
 You can have fun with your own copy by going 
@@ -19,7 +16,7 @@ gives us a useful tool to visualize how well the model is doing. A perfect model
 triangle with the red line. A model that is no better than random guessing would put the blue line on top of the 
 red line which is given as a baseline for comparison."""),
 
-          html.Img(src='/assets/roc.png', style={'width': '50%'}),
+          html.Img(src='/assets/roc.png', style={'width': '50%', 'align': 'middle'}),
 
           dcc.Markdown("""
 The area under the blue tells us how well the model can use the variations between the examples of people's 
@@ -30,7 +27,7 @@ The next step is examining the model's features and looking at how helpful each 
 To do this we run the model multiple times, filling in one column with random noise and comparing the results with 
 each other. Doing so and plotting the results gives you something like this."""),
 
-          html.Img(src='/assets/pretrim.png', style={'width': '75%'}),
+          html.Img(src='/assets/pretrim.png', style={'width': '50%', 'align': 'middle'}),
 
           dcc.Markdown("""
 After trimming the features with zero or negative explanatory power, we run the model again and test for the area 
@@ -39,7 +36,7 @@ under the blue line again. We also check to see that the features we kept are in
 `[0]	validation_0-auc:0.783355	validation_1-auc:0.770201
 XGBRFClassifier validation ROC AUC: 0.7702009468059364`"""),
 
-          html.Img(src='/assets/posttrim.png', style={'width': '75%'}),
+          html.Img(src='/assets/posttrim.png', style={'width': '50%', 'align': 'middle'}),
 
           dcc.Markdown("""
 So far we've made all of our prediction directly from the model. We can dig in to see what probability the model 
@@ -49,19 +46,6 @@ guesses.
 Given that our goal is to effectively allocate resources we want to balance false negatives, people we're sending 
 to get poked and prodded who won't end up being diabetic, with false negatives, people who are really diabetic that 
 we're not recommending screening for."""),
-          # html.Img(src='https://plot.ly/~pkutrich/27.embed')
-          # dcc.Graph(figure=PlotFig().fig)
-          # html.Div(
-          html.Iframe(width="900", height="800", src="//plot.ly/~pkutrich/27.embed"),
-          # html.Img(src="https://plot.ly/~pkutrich/27.png?share_key=RSPSAmiQWEC5fXFWL77lyr",
-          #          alt="dist-heat-roc-slider-h",
-          #          style="max-width: 100%;width: 1050px;" ,
-          #          width="1050",
-          #          # onerror="this.onerror=null;this.src='https://plot.ly/404.png';",
-          #          ),
-          # html.Script({'src': "https://plot.ly/embed.js",
-          #              'data-plotly': "pkutrich:27",
-          #              'sharekey_plotly': "RSPSAmiQWEC5fXFWL77lyr"})
-          # )
+          html.Iframe(width="1000", height="500", src="//plot.ly/~pkutrich/27.embed"),
           ]
 
