@@ -63,8 +63,8 @@ we're not recommending screening for."""),
                    # onerror="this.onerror=null;this.src='https://plot.ly/404.png';",
                    ),
           html.Script(src="https://plot.ly/embed.js",
-                      data="pkutrich:27",
-                      sharekey="RSPSAmiQWEC5fXFWL77lyr")
+                      data-plotly="pkutrich:27",
+                      sharekey-plotly="RSPSAmiQWEC5fXFWL77lyr")
           )
           ]
 # <div>
