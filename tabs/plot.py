@@ -7,24 +7,33 @@ from sklearn.metrics import confusion_matrix
 
 
 class PlotFig(object):
+    """Create a plotly figure containing a distplot, heatmap, and ROC curve all controlled by a single slider.
+
+    """
+
     def __init__(self):
         self.fig = self.create_fig()
 
     def create_fig(self):
         print("creating figure...")
+        # Import data.
         val = pd.read_csv(
             "https://raw.githubusercontent.com/llpk79/recommend-diabetes-screening/master/assets/val_data.csv")
         roc = pd.read_csv(
             "https://raw.githubusercontent.com/llpk79/recommend-diabetes-screening/master/assets/roc_data.csv")
+
+        # Create histogram data.
         hist_data = val['y_pred_proba1']
         kde = gaussian_kde(hist_data)
         y = kde.pdf(np.linspace(min(hist_data), max(hist_data)))
+
+        # Our base truth.
         y_true = val['y_val'].astype(int)
 
         # Generate list of probabilities.
         line_space = np.linspace(min(hist_data), max(hist_data), 100)
 
-        # List all confusion matrix outputs for annotating heatmap with slider.
+        # List all confusion matrix outputs for each probability to annotate heatmap with slider.
         al, bl, cl, dl = [], [], [], []
         for j in line_space:
             y_pred = np.array(hist_data) > j
@@ -39,6 +48,7 @@ class PlotFig(object):
         fig.update_layout(go.Layout(height=475,
                                     width=1050,
                                     showlegend=False),
+                          # First four annotations are for labeling heatmap frames.
                           annotations=(go.layout.Annotation(text='{}'.format(al[0]),
                                                             x=.565,
                                                             y=.775,
@@ -71,6 +81,7 @@ class PlotFig(object):
                                                             xref='paper',
                                                             yref='paper',
                                                             ),
+                                       # The rest are for titles and text at the bottom.
                                        go.layout.Annotation(text='Distribution of probabilities',
                                                             x=0.025,
                                                             y=1.11,
@@ -99,48 +110,51 @@ class PlotFig(object):
                                                             yref='paper'
                                                             ),
                                        go.layout.Annotation(
-                                           text='Manipulating Probability Threshold to Optimize True Positive Rate.',
-                                           x=.5,
-                                           y=1.325,
-                                           showarrow=False,
-                                           font=dict(color='black',
-                                                     size=18),
-                                           xref='paper',
-                                           yref='paper'
-                                           ),
+                                                            text='Manipulating Probability Threshold to Optimize True '
+                                                                 'Positive Rate.',
+                                                            x=.5,
+                                                            y=1.325,
+                                                            showarrow=False,
+                                                            font=dict(color='black',
+                                                                      size=18),
+                                                            xref='paper',
+                                                            yref='paper'
+                                                            ),
                                        go.layout.Annotation(
-                                           text='Move the slider to the right to classify more people as non diabetic.',
-                                           x=.5,
-                                           y=-.25,
-                                           showarrow=False,
-                                           font=dict(color='black',
-                                                     size=12),
-                                           xref='paper',
-                                           yref='paper'
-                                           ),
+                                                            text='Move the slider to the right to classify more '
+                                                                 'people as non diabetic.',
+                                                            x=.5,
+                                                            y=-.25,
+                                                            showarrow=False,
+                                                            font=dict(color='black',
+                                                                      size=12),
+                                                            xref='paper',
+                                                            yref='paper'
+                                                            ),
                                        go.layout.Annotation(
-                                           text='The green bar on the left frame indicates the probability threshold '
-                                                'for being diabetic. See how many people are correctly classified in '
-                                                'the middle frame.',
-                                           x=.5,
-                                           y=-.35,
-                                           showarrow=False,
-                                           font=dict(color='black',
-                                                     size=12),
-                                           xref='paper',
-                                           yref='paper'
-                                           ),
+                                                            text='The green bar on the left frame indicates the '
+                                                                 'probability threshold for being diabetic. See how '
+                                                                 'many people are correctly classified in the middle '
+                                                                 'frame.',
+                                                            x=.5,
+                                                            y=-.35,
+                                                            showarrow=False,
+                                                            font=dict(color='black',
+                                                                      size=12),
+                                                            xref='paper',
+                                                            yref='paper'
+                                                            ),
                                        go.layout.Annotation(
-                                           text='The right frame plots the false positive rate on the x-axis vs the '
-                                                'true positive rate on the y-axis',
-                                           x=.5,
-                                           y=-.45,
-                                           showarrow=False,
-                                           font=dict(color='black',
-                                                     size=12),
-                                           xref='paper',
-                                           yref='paper'
-                                           ),
+                                                            text='The right frame plots the false positive rate on '
+                                                                 'the x-axis vs the true positive rate on the y-axis',
+                                                            x=.5,
+                                                            y=-.45,
+                                                            showarrow=False,
+                                                            font=dict(color='black',
+                                                                      size=12),
+                                                            xref='paper',
+                                                            yref='paper'
+                                                            ),
                                        )
                           )
 
@@ -256,8 +270,8 @@ class PlotFig(object):
 
 
 def main():
-    fig = PlotFig().fig
-    return fig
+    figure = PlotFig().fig
+    return figure
 
 
 if __name__ == "__main__":
