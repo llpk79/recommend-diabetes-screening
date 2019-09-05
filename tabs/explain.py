@@ -52,7 +52,7 @@ we're not recommending screening for."""),
           # html.Img(src='https://plot.ly/~pkutrich/27.embed')
           # dcc.Graph(figure=PlotFig().fig)
           # html.Div(
-          html.Iframe(width="900", height="800", frameborder="0", scrolling="no", src="//plot.ly/~pkutrich/27.embed"),
+          html.Iframe(width="900", height="800", src="//plot.ly/~pkutrich/27.embed"),
           # html.Img(src="https://plot.ly/~pkutrich/27.png?share_key=RSPSAmiQWEC5fXFWL77lyr",
           #          alt="dist-heat-roc-slider-h",
           #          style="max-width: 100%;width: 1050px;" ,
