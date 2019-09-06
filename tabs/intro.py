@@ -20,6 +20,8 @@ In this very limited project, only data from King County, WA is used. Using more
 question could lead to better results and, perhaps, an effective clinical tool. """),
     dcc.Markdown("""
 
-###### Disclaimer: This web app is a week-long school project and has not been tested in any rigorous way. It is for 
+###### Disclaimer: 
+
+This web app is a week-long school project and has not been tested in any rigorous way. It is for 
 demonstration and it's recommendations are for entertainment purposes only. """),
     html.Img(src='/assets/dist.png', style={'width': '75%', 'align': 'middle'})]
