@@ -24,4 +24,6 @@ question could lead to better results and, perhaps, an effective clinical tool. 
 
 This web app is a week-long school project and has not been tested in any rigorous way. It is for 
 demonstration and it's recommendations are for entertainment purposes only. """),
-    html.Img(src='/assets/dist.png', style={'width': '75%', 'align': 'middle'})]
+    # html.Img(src='/assets/dist.png', style={'width': '75%', 'align': 'middle'}),
+    html.Iframe(width="800", height="800", src="//plot.ly/~pkutrich/16.embed"),
+]

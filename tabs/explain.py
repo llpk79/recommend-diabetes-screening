@@ -17,8 +17,7 @@ triangle with the red line. A model that is no better than random guessing would
 red line which is given as a baseline for comparison."""),
 
           # html.Img(src='/assets/roc.png', style={'align': 'right'}),
-          html.Iframe(width="500", height="500", src="//plot.ly/~pkutrich/37.embed"),
-
+          html.Iframe(width="800", height="500", src="//plot.ly/~pkutrich/32.embed"),
           dcc.Markdown("""
 The area under the blue tells us how well the model can use the variations between the examples of people's 
 information it has to tell if a given person is a diabetic or not. For this model the area under the blue line 
@@ -29,7 +28,7 @@ To do this we run the model multiple times, filling in one column with random no
 each other. Doing so and plotting the results gives you something like this."""),
 
           # html.Img(src='/assets/pretrim.png', style={'align': 'right'}),
-          html.Iframe(width="500", height="500", src="//plot.ly/~pkutrich/34.embed"),
+          html.Iframe(width="800", height="500", src="//plot.ly/~pkutrich/34.embed"),
 
           dcc.Markdown("""
 After trimming the features with zero or negative explanatory power, we run the model again and test for the area 
@@ -39,7 +38,7 @@ under the blue line again. We also check to see that the features we kept are in
 XGBRFClassifier validation ROC AUC: 0.7702009468059364`"""),
 
           # html.Img(src='/assets/posttrim.png', style={'align': 'right'}),
-          html.Iframe(width="500", height="500",  src="//plot.ly/~pkutrich/37.embed"),
+          html.Iframe(width="800", height="500",  src="//plot.ly/~pkutrich/37.embed"),
 
           dcc.Markdown("""
 So far we've made all of our prediction directly from the model. We can dig in to see what probability the model 
