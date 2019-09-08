@@ -43,6 +43,6 @@ guesses.
 Given that our goal is to effectively allocate resources we want to balance false positives, people we're sending 
 to get poked and prodded who won't end up being diabetic, with false negatives, people who are really diabetic that 
 we're not recommending screening for."""),
-          html.Iframe(width="1000", height="500", src="//plot.ly/~pkutrich/27.embed"),
+          html.Iframe(width="900", height="500", src="//plot.ly/~pkutrich/27.embed"),
           ]
 
