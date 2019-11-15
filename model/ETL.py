@@ -1,19 +1,16 @@
-# Some imports will be used in the notebook.
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import re
-import matplotlib.pyplot as plt
-from scipy.stats import ttest_ind
-from sklearn.utils import shuffle
-
-"""Script for Cleaning data from 
+"""Script for Cleaning data from
 https://www.doh.wa.gov/DataandStatisticalReports/DataSystems/BehavioralRiskFactorSurveillanceSystemBRFSS
 for the years 2011 - 2017.
 
 The dataset is 200mbs in entirety and consists of 464 columns. Many are near duplicate survey questions asked
 in different years and are here combined where able.
 """
+
+import pandas as pd
+import numpy as np
+import re
+from sklearn.utils import shuffle
+
 
 # Read in data to pandas DataFrame
 df = pd.read_stata("C:\\Users\Paul\PycharmProjects\BlogPost\data\WA_BRFSS_11to17_B.dta",
@@ -43,12 +40,12 @@ df['Home ownership'] = df['Ownership'].replace('Don\'t Know', 'Unknown')
 df['Total number living in household'] = df['Adults'] + df['Children']
 
 # Change values for nicer plotting.
-df['Race'] = df['_race'].map({'White NH': 'White', 
-                              'Hispanic': 'Hisp.', 
-                              'Asian NH': 'Asian', 
+df['Race'] = df['_race'].map({'White NH': 'White',
+                              'Hispanic': 'Hisp.',
+                              'Asian NH': 'Asian',
                               'Black NH': 'Black',
-                              'DK/Refused': 'Don\'t\nKnow', 
-                              'AIAN NH': 'AIAN', 
+                              'DK/Refused': 'Don\'t\nKnow',
+                              'AIAN NH': 'AIAN',
                               'Other NH': 'Other',
                               'NHOPI NH': 'NHOPI'})
 
@@ -95,7 +92,7 @@ desert_zips = list(set(zips))
 df['In Food Desert'] = df['Zip Code'].map(lambda x: True if x in desert_zips else False)
 df['Zip Code'] = df['Zip Code'].astype(int).astype(str)
 
-# Relabel columns with respondent's self assesment.
+# Relabel columns with respondent's self assessment.
 df['Good Health'] = df['genhlth'].replace('DK', 'Unknown')
 df['Good Health'] = df['Good Health'].replace('Missing', 'Unknown')
 df['General Health'] = df['Good Health'].replace('Excelent', 'Excellent')
@@ -106,7 +103,7 @@ df['Average hours of sleep'] = df['sleptim1'].map(lambda x: np.nan if x in [99, 
 # Insurance status.
 df['Insurance status'] = df['_hcvu651'].replace('Missing', 'Unknown')
 
-# Did you forego medical care do to cost?
+# Did you forgo medical care do to cost?
 df['Dr Too Much'] = df['medcost'].replace('DK', 'Unknown')
 df['Skipped a Dr visit because of money'] = df['Dr Too Much'].replace('Refused', 'Unknown')
 
@@ -123,12 +120,13 @@ df['pre_diab1'] = df['prediab1'].map(lambda x: True if x == 'Yes' else False)
 df['pre_diab2'] = df['diabete3'].map(lambda x: True if x == 'Borderline/Pre-Diabetes' else False)
 df['Pre Diabetic'] = ((df['pre_diab1'] == True) | (df['pre_diab2'] == True)).astype(str)
 
-df['Diabetic'] = df['diabete3'].map(lambda x: True if x  == 'Yes' else False)
+df['Diabetic'] = df['diabete3'].map(lambda x: True if x == 'Yes' else False)
 
-# Add active column for meeting activity recomendations, boolean .
+# Add active column for meeting activity recommendations, boolean .
 df['active'] = pd.concat([df['_paindex'], df['_paindx1']], join='inner', ignore_index=True, sort=False)
 df['active'] = df['active'].cat.add_categories('Unknown')
 df['Activity status'] = df['active'].fillna('Unknown')
+
 
 # Functions to decode weekly and monthly frequency responses.
 def nothing(x):
@@ -137,9 +135,11 @@ def nothing(x):
     else:
         return False
 
+
 def etoh(x):
+    """Decode alcohol related columns"""
     week = re.match(r'1(\d\d)', str(x).strip())
-    month =  re.match(r'2(\d\d)', str(x).strip())
+    month = re.match(r'2(\d\d)', str(x).strip())
     unknown = re.match(r'7|8', str(x).strip())
     none = re.match(r'9', str(x).strip())
     if week:
@@ -154,6 +154,7 @@ def etoh(x):
     elif none:
         return '0'
 
+
 def fruit(x):
     if re.match(r'1', str(x)):
         return 'Daily'
@@ -166,6 +167,7 @@ def fruit(x):
     else:
         return ''
 
+
 # Alcohol consumption.
 df['Estimated number of alcoholic drinks per month'] = df['alcday5'].map(etoh)
 
@@ -177,26 +179,26 @@ df['Fruit fanaticism'] = df['Fruit'].map(lambda x: 'Unknown' if x == '' else x)
 
 # The columns we want to keep in some sort of order.
 final_colunns = [
-                 'Age range',
-                 'Race',
-                 'Income range',
-                 'Income over $75K',
-                 'Home ownership',
-                 'Total number living in household',
-                 'Employment status',
-                 'Activity status',
-                 'Body Mass Index',
-                 'Diabetic',
-                 'General Health',
-                 'Fruit fanaticism',
-                 'Vegetable voraciousness',
-                 'Average hours of sleep',
-                 'Insurance status',
-                 'Skipped a Dr visit because of money',
-                 'Last Dr visit',
-                 'Smoking status',
-                 'Estimated number of alcoholic drinks per month',
-                 ]
+    'Age range',
+    'Race',
+    'Income range',
+    'Income over $75K',
+    'Home ownership',
+    'Total number living in household',
+    'Employment status',
+    'Activity status',
+    'Body Mass Index',
+    'Diabetic',
+    'General Health',
+    'Fruit fanaticism',
+    'Vegetable voraciousness',
+    'Average hours of sleep',
+    'Insurance status',
+    'Skipped a Dr visit because of money',
+    'Last Dr visit',
+    'Smoking status',
+    'Estimated number of alcoholic drinks per month',
+]
 
 df = df[final_colunns]
 
