@@ -1,15 +1,16 @@
-import pandas as pd
-import numpy as np
-import re
-from sklearn.utils import shuffle
-
-"""Script for Cleaning data from 
+"""Script for Cleaning data from
 https://www.doh.wa.gov/DataandStatisticalReports/DataSystems/BehavioralRiskFactorSurveillanceSystemBRFSS
 for the years 2011 - 2017.
 
 The dataset is 200mbs in entirety and consists of 464 columns. Many are near duplicate survey questions asked
 in different years and are here combined where able.
 """
+
+import pandas as pd
+import numpy as np
+import re
+from sklearn.utils import shuffle
+
 
 # Read in data to pandas DataFrame
 df = pd.read_stata("C:\\Users\Paul\PycharmProjects\BlogPost\data\WA_BRFSS_11to17_B.dta",
@@ -136,6 +137,7 @@ def nothing(x):
 
 
 def etoh(x):
+    """Decode alcohol related columns"""
     week = re.match(r'1(\d\d)', str(x).strip())
     month = re.match(r'2(\d\d)', str(x).strip())
     unknown = re.match(r'7|8', str(x).strip())
