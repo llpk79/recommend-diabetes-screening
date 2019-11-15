@@ -1,3 +1,7 @@
+"""
+Prediction tab components.
+"""
+
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
@@ -189,5 +193,4 @@ def predict(Age,
     print(f'Prediction: {positive}, Probabity: {y_pred_proba}')
     if positive:
         return 'You may benefit from a medical diabetic screening.'
-    else:
-        return 'The model does not recommend diabetic screening.'
+    return 'The model does not recommend diabetic screening.'
